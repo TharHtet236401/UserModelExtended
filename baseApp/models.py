@@ -38,7 +38,7 @@ class Post(TimeStampedModel):
     
     def clean(self):
         if len(self.title) < 10:
-            raise ValidationError("Title must be at least 10 characters")
+            raise ValidationError("Title must be at least 10 characters from model error")
 
     def save(self, *args, **kwargs):
         if not self.slug:

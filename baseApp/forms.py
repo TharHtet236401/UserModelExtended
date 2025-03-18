@@ -29,8 +29,8 @@ class PostForm(forms.ModelForm):
             'content': forms.Textarea(attrs={'class': 'form-control', 'rows': 5, 'placeholder': 'Write your content...'}),
         }
 
-    def clean_title(self):
-        title = self.cleaned_data.get('title')
-        if len(title) < 5:
-            raise forms.ValidationError("Title must be at least 5 characters long.")
-        return title
+    # def clean_title(self):
+    #     title = self.cleaned_data.get('title')
+    #     if len(title) < 5:
+    #         raise forms.ValidationError("Title must be at least 5 characters long ok?.")
+    #     return title

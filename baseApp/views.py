@@ -62,16 +62,28 @@ def register_view(request):
     return render(request, 'baseApp/register_form.html', context)
 
 def create_post(request):
-    if request.method == 'POST':
-        print("it is post")
-        form = PostForm(request.POST)
-        print("still reached")
-        user = request.user
-        if form.is_valid():
-            form.instance.author = user
-            form.save()
-            return redirect('home')
-    else:
-        form = PostForm()
-    return render(request, 'baseApp/create_post.html', {'form': form})
+    try:
+        if request.method == 'POST':
+            form = PostForm(request.POST)
+            user = request.user
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.author = user
+                post.save()
+                messages.success(request, 'Post created successfully!')
+                return redirect('home')
+            else:
+                for field, errors in form.errors.items():
+                    for error in errors:
+                        messages.error(request, f"{field}: {error}")
+        else:
+            form = PostForm()
+        
+        if request.headers.get('HX-Request'):
+            return render(request, 'baseApp/create_post.html', {'form': form})
+        return render(request, 'baseApp/create_post.html', {'form': form})
+    
+    except Exception as e:
+        messages.error(request, f'An error occurred: {str(e)}')
+        return redirect('home')
 
