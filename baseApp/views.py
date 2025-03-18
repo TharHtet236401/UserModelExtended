@@ -18,6 +18,8 @@ def home(request):
     context = {
         'posts': page_obj
     }
+    if request.headers.get('HX-Request'):
+        return render(request, 'baseApp/blog_section.html', {'posts': posts})
     return render(request, 'baseApp/home.html', context)
 
 
