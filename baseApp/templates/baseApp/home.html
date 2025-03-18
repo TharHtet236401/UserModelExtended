@@ -1,42 +1,7 @@
 {% extends 'baseApp/base.html' %}
 
 {% block content %}
-    <div class="d-flex justify-content-end mb-3">
-        {% if request.user.is_authenticated %}
-            <span class="me-2">{{ request.user.username }}</span>
-            <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
-        {% else %}
-            <span class="me-2">Anonymous User</span>
-            <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
-        {% endif %}
-    </div>
-   
-    <div class="container mt-5">
-        <h1 class="text-center mb-4">User Information</h1>
-        <div class="list-group">
-            {% for post in posts %}
-                <div class="list-group-item list-group-item-action mb-3">
-                    <h2 class="h5">Title: {{ post.title }}</h2>
-                    <p class="mb-1"><strong>Content:</strong> {{ post.content }}</p>
-                    <p class="mb-1"><strong>Author:</strong> {{ post.author.username }}</p>
-                    <p class="mb-1"><strong>Slug:</strong> {{ post.slug }}</p>
-                    <p class="mb-1"><strong>Created at:</strong> {{ post.created_at }}</p>
-                    <p class="mb-1"><strong>Updated at:</strong> {{ post.updated_at }}</p>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
-    <div class="pagination d-flex justify-content-center mt-4">
-        {% if posts.has_previous %} 
-            <a href="?page=1" class="btn btn-outline-primary me-2">&laquo; First</a>
-            <a href="?page={{ posts.previous_page_number }}" class="btn btn-outline-primary me-2">Previous</a>
-        {% endif %}
-        <span class="current mx-2">
-            Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
-        </span>
-        {% if posts.has_next %}
-            <a href="?page={{ posts.next_page_number }}" class="btn btn-outline-primary me-2">Next</a>
-            <a href="?page={{ posts.paginator.num_pages }}" class="btn btn-outline-primary">&raquo; Last</a>
-        {% endif %}
+    <div class="blog-container mt-5">
+        {% include 'baseApp/blog_section.html' %}
     </div>
 {% endblock %}
