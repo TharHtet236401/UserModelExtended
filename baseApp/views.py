@@ -7,12 +7,16 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import RegisterForm
 from .models import Post
+from django.core.paginator import Paginator
 # Create your views here.
 @login_required
 def home(request):
     posts = Post.objects.all()
+    paginator = Paginator(posts, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     context = {
-        'posts': posts
+        'posts': page_obj
     }
     return render(request, 'baseApp/home.html', context)
 
