@@ -61,13 +61,15 @@ def register_view(request):
 
 def create_post(request):
     if request.method == 'POST':
+        print("it is post")
         form = PostForm(request.POST)
+        print("still reached")
+        user = request.user
         if form.is_valid():
+            form.instance.author = user
             form.save()
             return redirect('home')
+    else:
         form = PostForm()
-    context = {
-        'form': form
-    }
-    return render(request, 'baseApp/create_post.html', context)
+    return render(request, 'baseApp/create_post.html', {'form': form})
 
