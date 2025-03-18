@@ -1,0 +1,29 @@
+{% extends 'baseApp/base.html' %}
+
+{% block content %}
+    <div class="d-flex justify-content-end mb-3">
+        {% if request.user.is_authenticated %}
+            <span class="me-2">{{ request.user.username }}</span>
+            <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+        {% else %}
+            <span class="me-2">Anonymous User</span>
+            <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+        {% endif %}
+    </div>
+   
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">User Information</h1>
+        <div class="list-group">
+            {% for post in posts %}
+                <div class="list-group-item list-group-item-action mb-3">
+                    <h2 class="h5">Title: {{ post.title }}</h2>
+                    <p class="mb-1"><strong>Content:</strong> {{ post.content }}</p>
+                    <p class="mb-1"><strong>Author:</strong> {{ post.author.username }}</p>
+                    <p class="mb-1"><strong>Slug:</strong> {{ post.slug }}</p>
+                    <p class="mb-1"><strong>Created at:</strong> {{ post.created_at }}</p>
+                    <p class="mb-1"><strong>Updated at:</strong> {{ post.updated_at }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

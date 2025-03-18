@@ -1,0 +1,69 @@
+*.pyc
+__pycache__/
+db.sqlite3
+*.log
+*.pot
+*.py[cod]
+*.egg-info/
+*.env
+*.venv
+*.DS_Store
+*.local
+*.sqlite3
+*.pdb
+*.egg
+*.egg-info
+*.coverage
+*.migrations
+*.staticfiles
+*.media
+*.cache
+*.dist-info
+*.whl
+*.zip
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+*.tgz
+*.bak
+*.swp
+*.swo
+*.swn
+*.orig
+*.rej
+*.class
+*.jar
+*.war
+*.dll
+*.exe
+*.o
+*.out
+*.a
+*.so
+*.dSYM/
+*.class
+*.log
+*.tmp
+*.temp
+*.pid
+*.seed
+*.coverage
+*.pytest_cache/
+*.tox/
+*.venv/
+*.env/
+*.env.local
+*.env.development.local
+*.env.test.local
+*.env.production.local
+# Ignore Django migrations
+*/migrations/*
+# Ignore database files
+*.sqlite3
+# Ignore media files
+/media/
+# Ignore static files
+/static/
+# Ignore local settings
+local_settings.py
+# End Generation Here
