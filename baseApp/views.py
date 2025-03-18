@@ -11,7 +11,7 @@ from django.core.paginator import Paginator
 # Create your views here.
 @login_required
 def home(request):
-    posts = Post.objects.all()
+    posts = Post.objects.select_related('author').all()
     paginator = Paginator(posts, 5)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
