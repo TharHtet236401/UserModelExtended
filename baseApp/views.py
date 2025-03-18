@@ -5,7 +5,7 @@ from django.shortcuts import redirect
 from .forms import LoginForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import RegisterForm
+from .forms import RegisterForm, PostForm
 from .models import Post
 from django.core.paginator import Paginator
 # Create your views here.
@@ -58,4 +58,16 @@ def register_view(request):
         'form': form
     }
     return render(request, 'baseApp/register_form.html', context)
+
+def create_post(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+        form = PostForm()
+    context = {
+        'form': form
+    }
+    return render(request, 'baseApp/create_post.html', context)
 
